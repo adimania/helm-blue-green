@@ -1,0 +1,14 @@
+green:
+  enabled: false
+  tag: "1.12"
+
+blue:
+  enabled: false
+  tag: "1.11"
+
+replicas: 2
+image: nginx
+app: test-nginx
+
+svc:
+  type: LoadBalancer

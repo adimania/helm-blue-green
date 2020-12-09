@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app }}-blue
+spec:
+  {{ if .Values.blue.enabled }}
+  replicas: {{ .Values.replicas }}
+  {{- else }}
+  replicas: 1
+  {{- end }}  
+  selector:
+    matchLabels:
+      app: {{ .Values.app }}
+      color: blue
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app }}
+        color: blue
+    spec:
+      containers:
+        - image: "{{ .Values.image }}:{{ .Values.blue.tag }}"
+          imagePullPolicy: Always
+          name: {{ .Values.app }}-{{ .Values.image }}
+          ports:
+            - containerPort: 80

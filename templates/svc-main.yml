@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: main-{{ .Values.app }}
+spec:
+  type: {{ .Values.svc.type }}
+  selector:
+    app: {{ .Values.app }}
+    {{ if .Values.blue.enabled }}
+    color: blue
+    {{- else }}
+    color: green
+    {{- end }}
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
